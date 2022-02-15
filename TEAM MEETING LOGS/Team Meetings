@@ -8,4 +8,11 @@ February 7th (7:15 - 7:30):
   - Look into the technologies that we are trying to implement (Spotify/Music Visualizer API).
     -Figure out the UI of our website (login page, login button etc.).
   - Look into the different languages that we are using and try and find a more efficient and viable way to implement them.
+
+February 14th (7:15 - 7:30):
+  - Discussed with TA our current progress on what we talked about last week.
+  - Looked into the Music Visualizer API, uses JavaScript for basic visual components
+  - Recommended that we look deeper into the Spotify API as our entire website depends on it.
+  - Restructure our Architecture Diagram
+  - Make sure to make a backup plan just incase the Spotify API ends up not working. 
   
