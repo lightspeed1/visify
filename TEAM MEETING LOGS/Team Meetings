@@ -16,3 +16,13 @@ February 14th (7:15 - 7:30):
   - Restructure our Architecture Diagram
   - Make sure to make a backup plan just incase the Spotify API ends up not working. 
   
+February 21st (7:15 - 7:30):
+  - Looked into Spotify API documentation. 
+  -Spoke with the TA via email instead of actually meeting.
+ 
+February 28th (7:15 - 7:30):
+  - Look into how the music will be visualized and what data we are getting from Spotify to translate to that visualization
+  - How will the music visualization be made custom (something to seperate us from the others)
+  - What data are we getting from the API
+  - Look into other different types of visualizations (maybe something cooler than just a typical bar graph)
+  - Create Readme and start thr frontend UI of the website
