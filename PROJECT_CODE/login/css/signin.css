@@ -1,0 +1,121 @@
+html, body{
+    height:100%; /* important to vertically align the container */
+    margin:0;
+    padding:0;
+}
+
+body {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+.form{
+  text-transform: uppercase;
+  font-family: helvetica;
+  font-size: 12px;
+}
+
+.form-signin {
+  width: 200%;
+  max-width: 450px;
+  padding: 15px;
+  margin: auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+  color: white;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: 10px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.text-box{
+  font-size: 50px;
+  font-family: Helvetica;
+}
+
+span{
+  display: inline-block;
+  color: white;
+  animation: mover 6s linear infinite;
+}
+.rectangle{
+  height: 50px;
+  width: 100px;
+  background-color: #555;
+}
+@keyframes mover{
+  0%{
+    text-shadow: 0 0 30px rgba(0, 0, 0, 0);
+  }
+  50%{
+    text-shadow: 0 0 30px rgba(0, 0, 0, 0.30);
+    transform: translateY(30px);
+  }
+  100%{
+    text-shadow: 0 0 30px rgba(0, 0, 0, 0);
+  }
+}
+
+span:nth-child(1){
+  animation-delay: 0.5s;
+}
+span:nth-child(2){
+  animation-delay: 1s;
+}
+span:nth-child(3){
+  animation-delay: 1.5s;
+}
+span:nth-child(4){
+  animation-delay: 2s;
+}
+span:nth-child(5){
+  animation-delay: 2.5s;
+}
+span:nth-child(6){
+  animation-delay: 3s;
+}
+
+button{
+  padding: 15px 40px;
+  background-color: black;
+  border: 1px;;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: helvetica;
+  font-size: 12px;
+  letter-spacing: 3px;
+  position: relative;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+body{
+  background-image: url('../img/blackgoop.gif');
+  background-size: cover;
+  height: 100vh;
+  padding:0;
+  margin:0;
+}
