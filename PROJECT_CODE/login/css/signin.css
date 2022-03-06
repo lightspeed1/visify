@@ -11,13 +11,19 @@ body {
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #f5f5f5;
+
+  background-image: url('../img/blackgoop.gif');
+  background-size: cover;
+  height: 100vh;
+  padding:0;
+  margin:0;
 }
 .form{
   text-transform: uppercase;
   font-family: helvetica;
   font-size: 12px;
 }
+
 
 .form-signin {
   width: 200%;
@@ -39,13 +45,14 @@ body {
 
 .form-signin input[type="email"] {
   margin-bottom: 10px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+  border-radius: 0;
+  font-family: helvetica;
+  
 }
 .form-signin input[type="password"] {
   margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  border-radius: 0;
+  font-family: helvetica;
 }
 
 .text-box{
@@ -109,13 +116,4 @@ button{
   display: block;
   margin-left: auto;
   margin-right: auto;
-}
-
-
-body{
-  background-image: url('../img/blackgoop.gif');
-  background-size: cover;
-  height: 100vh;
-  padding:0;
-  margin:0;
 }
