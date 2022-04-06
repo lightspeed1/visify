@@ -10,27 +10,14 @@ function visLogin() {
   var match = document.getElementById("match");
 
   // When the user starts to type something inside the password field
-  myInput.onload = function () {
+  myInput.onkeyup = function () {
     console.log("helllooo");
 
-    /* TODO: Question 1.1: Starts here */
     var lowerCaseLetters = new RegExp("[a-z]"); // : Fill in the regular expression for lowerCaseLetters 
     var upperCaseLetters = new RegExp("[A-Z]"); // : Fill in the regular expression for upperCaseLetters
     var numbers = new RegExp("[0-9]"); // Fill in the regular expression for digits
     var symbols = new RegExp(/[\!\@\#\$\%\^\&\*\(\)\_\-\=\+\[\]\{\}\;\:\"\'\,\<\>\.\?\/\\\|]/); // Fill in the regular expression for symbols
     var minLength = 12; // : Change the minimum length to what what it needs to be in the question    /[!@#\$%\^\&*\)\(+=._-]/
-    /* TODO: Question 1.1: Ends here */
-
-    /* TODO: Question 1.2:  Starts here */
-    /*
-         - So first read up on classList.  
-         - Perform a console.log(letter.classList) and check the array that you see. By default the first time, there should be just 1 element and it should be
-         "invalid". "invalid" is a class that is present in login.css. 
-         - Below, there are a bunch of if blocks and else blocks.
-         - Each if block means that some successful condition is satisfied for our password condition. So the red cross need to be converted to a check mark.
-         - Each else block stands for a failed condition, so the green check mark needs to be a red cross again.
-         - All that you need to do is, in each of the blocks, fill in the correct classNames for the remove and the add methods.
-         */
 
     console.log(letter.classList);
     // Validate lowercase letters
@@ -77,10 +64,9 @@ function visLogin() {
       length.classList.remove("valid");
       length.classList.add("invalid");
     }
-    /* TODO: Question 1.2:  Ends here */
 
     // Validate password and confirmPassword
-    var passEqualsConfPass = false; // TODO: Change this to the condition that needs to be checked so that the text entered in password equals the text in confirm password
+    var passEqualsConfPass = false; 
     if(myInput.value == confirmMyInput.value){
       passEqualsConfPass = true;
     }
@@ -93,10 +79,9 @@ function visLogin() {
     }
   };;
 
-  /* TODO Question 1.3: Starts here */
   confirmMyInput.onkeyup = function () {
   // Validate password and confirmPassword
-  var passEqualsConfPass = false; // TODO: Change this to the condition that needs to be checked so that the text entered in password equals the text in confirm password
+  var passEqualsConfPass = false; 
   if(myInput.value == confirmMyInput.value){ //checking to see if the password matchess
     passEqualsConfPass = true;
   }
@@ -107,14 +92,11 @@ function visLogin() {
     match.classList.remove("valid");
     match.classList.add("invalid");
   }
-    /* TODO Question 1.3: Ends here */
 
     // Disable or Enable the button based on the elements in classList
     enableButton(letter, capital, number, length, symbol, match);
   };
 }
-
-/* TODO Question 1.4: Starts here */
 function enableButton(letter, capital, number, length, symbol, match) {
   // TODO: Clear this function for students to implement
   var button = document.getElementById("my_submit_button");

@@ -1,0 +1,153 @@
+html, body{
+    height:100%; /* important to vertically align the container */
+    margin:0;
+    padding:0;
+}
+
+body {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+  background-image: url('../img/goopy.gif');
+  background-size: cover;
+  height: 100vh;
+  padding:0;
+  margin:0;
+}
+
+.text-box{
+  font-size: 50px;
+  font-family: Helvetica;
+}
+
+span{
+  display: inline-block;
+  color: white;
+  animation: mover 6s linear infinite;
+}
+.rectangle{
+  height: 50px;
+  width: 100px;
+  background-color: #555;
+}
+@keyframes mover{
+  0%{
+    text-shadow: 0 0 30px rgba(0, 0, 0, 0);
+  }
+  50%{
+    text-shadow: 0 0 30px rgba(0, 0, 0, 0.30);
+    transform: translateY(30px);
+  }
+  100%{
+    text-shadow: 0 0 30px rgba(0, 0, 0, 0);
+  }
+}
+
+span:nth-child(1){
+  animation-delay: 0.5s;
+}
+span:nth-child(2){
+  animation-delay: 1s;
+}
+span:nth-child(3){
+  animation-delay: 1.5s;
+}
+span:nth-child(4){
+  animation-delay: 2s;
+}
+span:nth-child(5){
+  animation-delay: 2.5s;
+}
+span:nth-child(6){
+  animation-delay: 3s;
+}
+
+.button{
+    padding: 15px 40px;
+    background-color: black;
+    border: 1px;;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: helvetica;
+    font-size: 12px;
+    letter-spacing: 3px;
+    position: relative;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.typed-out{
+    overflow: hidden;
+    border-right: .15em solid white;
+    white-space: nowrap;
+    animation: 
+    typing 1s steps(20, end) forwards;
+    font-size: 1.6rem;
+    width: 0;
+}
+.typed-in{
+    overflow: hidden;
+    border-right: .15em solid white;
+    white-space: nowrap;
+    animation: 
+    typing 1s steps(20, end) forwards;
+    font-size: 1.6rem;
+    width: 0;
+}
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+/*transition in*/
+/*.container{
+    animation: transitionIn 1.75s;
+}*/
+
+.container-fluid{
+    animation: transitionIn 1.75s;
+}
+
+@keyframes transitionIn{
+    from{
+        opacity: 0;
+        transform: rotateX(-30deg);
+    }
+    to{
+        opacity: 1;
+        transform: rotateX(0);
+    }
+}
+
+
+  
+
+/*Password verfication*/
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "\2713";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "\00D7";
+}

@@ -4,27 +4,44 @@ body {
     background: #f2f6e9;
 }
 .navbar {
-    background:#191970;
+    background:black;
 }
 .nav-link,
 .navbar-brand {
-    color: #fff;
+    color: white;
     cursor: pointer;
+    position: relative;
+}
+.navbar-brand::before{
+    left: 2px;
+    text-shadow: -1px 0 pink;
+    background: black;
+}
+.navbar-brand::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 2px;
+  width: 100%;
+  height: 100%;
 }
 .nav-link {
     margin-right: 1em !important;
 }
 .nav-link:hover {
-    color: #000;
+    color: gray;
 }
 .navbar-collapse {
     justify-content: flex-end;
 }
 .header {
-    background-image: url('../img/header-background.jpg');
+    background-image: url('../img/split.gif');
     background-size: cover;
     background-position: center;
     position: relative;
+    height: 100vh;
+    padding:0;
+    margin:0;
 }
 .overlay {
     position: absolute;
@@ -50,13 +67,14 @@ body {
 	line-height: 1.5;
 }
 .description button {
-    border:1px solid #191970;
-    background:#191970;
+    border:1px solid black;
+    background:white;
     border-radius: 0;
-    color:#fff;
+    color:black;
 }
 .description button:hover {
 	border:1px solid #fff;
     background:#fff;
     color:#000;
 }
+

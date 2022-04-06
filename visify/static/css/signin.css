@@ -12,12 +12,13 @@ body {
   padding-top: 40px;
   padding-bottom: 40px;
 
-  background-image: url('../img/goop.gif');
+  background-image: url('../img/blackgoop.gif');
   background-size: cover;
   height: 100vh;
   padding:0;
   margin:0;
 }
+
 
 .text-box{
   font-size: 50px;
@@ -80,26 +81,4 @@ button{
   display: block;
   margin-left: auto;
   margin-right: auto;
-}
-
-/* Add a green text color and a checkmark when the requirements are right */
-.valid {
-  color: green;
-}
-
-.valid:before {
-  position: relative;
-  left: -35px;
-  content: "\2713";
-}
-
-/* Add a red text color and an "x" when the requirements are wrong */
-.invalid {
-  color: red;
-}
-
-.invalid:before {
-  position: relative;
-  left: -35px;
-  content: "\00D7";
 }
