@@ -18,42 +18,7 @@ body {
   padding:0;
   margin:0;
 }
-.form{
-  text-transform: uppercase;
-  font-family: helvetica;
-  font-size: 12px;
-}
 
-
-.form-signin {
-  width: 200%;
-  max-width: 450px;
-  padding: 15px;
-  margin: auto;
-}
-.form-signin .checkbox {
-  font-weight: 400;
-  color: white;
-}
-.form-signin .form-control {
-  position: relative;
-  box-sizing: border-box;
-  height: auto;
-  padding: 10px;
-  font-size: 16px;
-}
-
-.form-signin input[type="email"] {
-  margin-bottom: 10px;
-  border-radius: 0;
-  font-family: helvetica;
-  
-}
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-radius: 0;
-  font-family: helvetica;
-}
 
 .text-box{
   font-size: 50px;

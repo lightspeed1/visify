@@ -15,6 +15,8 @@ app.listen(port, (error) => {
 
 
 
+
+
 // route pages to requests
 const static = path.join(__dirname, '../static');
 app.use(express.static(static, {extensions:['html']}));
