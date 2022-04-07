@@ -14,36 +14,114 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-  </head>
-  <body>
 	
-	<img src="../resources/img/beproudcapaabanner.jpg" class="img-fluid" alt="Registration Page Banner for CU Football">
+	<!--HTML CSS Styling-->
+	<link href="/css/create_account.css" rel="stylesheet">
+	<!--Password-->
+	<script src="js/login.js"></script>
+  </head>
+  <body onload="visLogin()">
     <br>
 	<br>
+	<!--<div class="container-type">
+		<div class="typed-out">
+			<h1>Are you ready?</h1>
+		</div>
+		<div class="typed-in">
+			<h1>Come join us.</h1>
+		</div>
+	</div> -->
+	<div class ="container-fluid">
+		<br>
+		<br>
+		<br>
 	<div class="container">
-		<form action="home.html">
-			<div class="form-group">
-				<label for="input_id">Full Name</label>
-				<input type="text" class="form-control" id="input_id" name="field_name" placeholder="Full Name">
+		<div class="form, center text-center">
+			<div class="text-box">
+				<span>V</span>
+				<span>i</span>
+				<span>s</span>
+				<span>i</span>
+				<span>f</span>
+				<span>y</span>
 			</div>
-
-			<div class="form-group">
-				<label for="input_id">Email Address</label>
-				<input type="text" class="form-control" id="input_id" name="field_name" placeholder="Email Address">
-			</div>
-
-			<div class="form-group">
-				<label for="input_id">Password</label>
-				<input type="password" class="form-control" id="input_id" name="field_name" placeholder="Password">
-			</div>
-
-			<div class="form-group">
-				<label for="input_id">Password</label>
-				<input type="password" class="form-control" id="input_id" name="field_name" placeholder=" Confirm Password">
-			</div>
-            
-			<input type="submit" value="Submit" class="btn btn-primary btn-block">
+		</div>
+		<br>
+		<br>
+		<form action="/sign_up" method ="post">
+				<div class="form-group">
+				  <input
+					type="text"
+					class="form-control"
+					name="firstName"
+					placeholder="First Name"
+					required="required"
+				  />
+				</div>
+				<div class="form-group">
+				  <input
+					type="text"
+					class="form-control"
+					name="lastName"
+					placeholder="Last Name"
+					required="required"
+				  />
+				</div>
+				<div class="form-group">
+					<input
+					  type="text"
+					  class="form-control"
+					  name="email"
+					  placeholder="Email Address"
+					  required="required"
+					/>
+				  </div>
+				<div class="form-group">
+				  <input
+					id="psw"
+					type="password"
+					class="form-control"
+					name="password"
+					placeholder="Password"
+					required="required"
+				  />
+				</div>
+				<div class="form-group">
+				  <input
+					id="cpsw"
+					type="password"
+					class="form-control"
+					name="confirm password"
+					placeholder="Confirm Password"
+					required="required"
+				  />
+				</div>
+				<div class="form-group">
+				  <button
+					id="my_submit_button"
+					class="btn btn-dark btn-block login-btn"
+					disabled
+				  >
+					START DREAMING
+				  </button>
+				</div>
+				<div class ="center text-center" >
+					<div id="message" style="display: block">
+						<h3 style="color: white;">Password must contain the following:</h3>
+						<p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+						<p id="capital" class="invalid">
+						A <b>capital (uppercase)</b> letter
+						</p>
+						<p id="number" class="invalid">A <b>number</b></p>
+						<p id="symbol" class="invalid">A <b>symbol</b> "!@#$%^&*()".</p>
+						<p id="length" class="invalid">Minimum <b>12 characters</b></p>
+						<p id="match" class="invalid">
+						Password and Confirm Password Match
+						</p>
+					</div>
+				</div>
 		</form>
+	</div>
 	</div>
 </body>
 </html>
