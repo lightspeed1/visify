@@ -1,7 +1,56 @@
 const express = require('express');
+const fs = require('fs');
+const pg = require('pg-promise')();
 const app = express();
 const port = 3000;
 const path = require('path');
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.json());              // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+
+//make sure you have postgres database set up with this information:
+const dbConfig = {
+    host: "localhost",
+    port: 5432,
+    database: "testdb1",
+    user: "postgres",
+    password: "cool23"
+};
+
+//Also make sure you have a table called "users" which consists of the following columns:
+            //  Column  |          Type          | Collation | Nullable | Default
+            // ----------+------------------------+-----------+----------+---------
+            // id       | integer                |           | not null |
+            // fullname | character varying(70)  |           |          |
+            // email    | character varying(255) |           |          |
+            // password | character varying(255) |           |          |
+
+var db = pg(dbConfig);
+
+//adds new user to users table on psql database
+app.post('/sign_up', (req, res) => {
+    var getMaxQuery = "SELECT MAX(id) FROM users;"
+    var maxId = null;
+    //id of new user will be max id + 1
+    db.any(getMaxQuery)
+        .then(function(rows){
+            maxId = (rows[0].max) + 1;
+            var rQ = req.body;
+            var addUserQuery = "INSERT INTO users VALUES ('" + (maxId) + "', '" + rQ.firstName + " " + rQ.lastName + "','" + rQ.email + "','" + rQ.password + "');"
+            db.any(addUserQuery)
+                .then(function(rows){
+                    console.log(rows);
+                })
+                .catch(function(err){
+                    console.log("error...");
+                });
+        })
+        .catch(function(err){
+            console.log("error...");
+        });
+    res.sendFile(path.join(__dirname + '/../static/index.html'));
+});
 
 // start listening
 app.listen(port, (error) => {
@@ -11,11 +60,6 @@ app.listen(port, (error) => {
         console.log(`Listening on dev port ${port}...`);
     }
 });
-
-
-
-
-
 
 // route pages to requests
 const static = path.join(__dirname, '../static');
