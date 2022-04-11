@@ -52,6 +52,10 @@ app.post('/sign_up', (req, res) => {
     res.sendFile(path.join(__dirname + '/../static/index.html'));
 });
 
+app.get('/signup/user', (req, res) =>{
+    var getUserInfo = "select * where id = email, password;"
+
+})
 // start listening
 app.listen(port, (error) => {
     if (error) {
