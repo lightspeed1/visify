@@ -20,7 +20,7 @@ var track_list = [
   'song2.mp3',
   'song3.mp3',
   'song4.mp3';
-  'song5.mp3
+  'song5.mp3'
 ]
 
 function preload() {
