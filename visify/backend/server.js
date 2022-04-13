@@ -52,10 +52,34 @@ app.post('/sign_up', (req, res) => {
     res.sendFile(path.join(__dirname + '/../static/index.html'));
 });
 
-app.get('/signup/user', (req, res) =>{
-    var getUserInfo = "select * where id = email, password;"
+app.post('/login', (req, res) =>{
+    var email = req.body.email;
+    var password = req.body.password;
+    //var getUserInfo = 'select id from users where id = \'' + email + '\' \'' + password + '\';';
 
-})
+	// Ensure the input fields exists and are not empty
+	if (email && password) {
+		connection.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], function(error, results, fields) {
+			// If there is an issue with the query, output the error
+			if (error) throw error;
+			// If the account exists
+			if (results.length > 0) {
+				// Authenticate the user
+				req.session.loggedin = true;
+				req.session.email = email;
+				// Redirect to home page
+				res.redirect('/index.html');
+			} else {
+				res.send('Incorrect Email or Password or Both!');
+			}			
+			res.end();
+		});
+	} else {
+		res.send('Please enter Email and Password!');
+		res.end();
+	}
+});
+
 // start listening
 app.listen(port, (error) => {
     if (error) {
