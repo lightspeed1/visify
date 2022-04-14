@@ -5,6 +5,7 @@ const app = express();
 const port = 3000;
 const path = require('path');
 var bodyParser = require('body-parser');
+const { info } = require('console');
 
 app.use(bodyParser.json());              // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
@@ -58,26 +59,39 @@ app.post('/login', (req, res) =>{
     //var getUserInfo = 'select id from users where id = \'' + email + '\' \'' + password + '\';';
 
 	// Ensure the input fields exists and are not empty
-	if (email && password) {
-		connection.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], function(error, results, fields) {
-			// If there is an issue with the query, output the error
-			if (error) throw error;
-			// If the account exists
-			if (results.length > 0) {
-				// Authenticate the user
-				req.session.loggedin = true;
-				req.session.email = email;
-				// Redirect to home page
-				res.redirect('/index.html');
-			} else {
-				res.send('Incorrect Email or Password or Both!');
-			}			
-			res.end();
-		});
-	} else {
-		res.send('Please enter Email and Password!');
-		res.end();
-	}
+    db.task('get-everything', task =>{
+        return task.batch([
+            task.any(email),
+            task.any(password)
+        ])
+
+    })
+    .then(info => {
+        if (email && password) {
+            dbConfig.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], function(err, results, fields) {
+                // If there is an issue with the query, output the error
+                if (err) throw err;
+                // If the account exists
+                if (results.length > 0) {
+                    // Authenticate the user
+                    req.session.loggedin = true;
+                    req.session.email = email;
+                    // Redirect to home page
+                    res.sendFile(path.join(__dirname + '/../static/index.html'));
+                } else {
+                    res.send('Incorrect Email or Password or Both!');
+                }			
+                res.end();
+            });
+        } else {
+            res.send('Please enter Email and Password!');
+            res.end();
+        }
+    })
+
+    .catch(err =>{
+        console.log('error', err);
+    })
 });
 
 // start listening
