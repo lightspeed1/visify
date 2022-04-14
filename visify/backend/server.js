@@ -95,6 +95,13 @@ app.post('/login', (req, res) =>{
     })
 });
 
+app.get('/logout', (req, res) =>{
+    req.session.destroy(()=>{
+        req.logout();
+        res.sendFile(path.join(__dirname + '/../static/index.html'));
+    })
+})
+
 // start listening
 app.listen(port, (error) => {
     if (error) {
