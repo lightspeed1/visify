@@ -9,6 +9,7 @@ const { info } = require('console');
 
 app.use(bodyParser.json());              // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(express.session({secret:"yftfrdutdfuygihiuytfyds232345566", resave:false, saveUninitialized: true}))
 
 //make sure you have postgres database set up with this information:
 const dbConfig = {
