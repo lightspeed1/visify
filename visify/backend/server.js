@@ -42,8 +42,8 @@ app.post('/sign_up', (req, res) => {
         .then(function(rows){
             maxId = (rows[0].max) + 1;
             var rQ = req.body;
-            const salt = await bcrypt.hash(rQ.password, 10); //using the bycrypt function to encrypt the password, the 10 means how many times the salt will run through
-            await db('users').insert({email: email, salt: hash});
+            const salt = bcrypt.hash(rQ.password, 10); //using the bycrypt function to encrypt the password, the 10 means how many times the salt will run through
+             db('users').insert({email: req.body.email, salt: hash});
             var addUserQuery = "INSERT INTO users VALUES ('" + (maxId) + "', '" + rQ.firstName + " " + rQ.lastName + "','" + rQ.email + "','" + rQ.password + "');"
             db.any(addUserQuery)
                 .then(function(rows){
@@ -76,7 +76,8 @@ app.post('/login', (req, res) =>{
             db.any(`SELECT * FROM users WHERE email = '${email}' AND password = '${password}'`)
                 .then(function(rows)
                 {
-                const validPass = await bcrypt.compare(req.body.password, user.hash);
+                const user =  db('users').first('*').where({email: email});
+                const validPass =  bcrypt.compare(req.body.password, user.hash);
                     console.log(rows);
                     if(rows.length == 1 || validPass)
                     {
