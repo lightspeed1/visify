@@ -4,6 +4,7 @@ const pg = require('pg-promise')();
 const app = express();
 const port = 3000;
 const path = require('path');
+
 var bodyParser = require('body-parser');
 const { info } = require('console');
 var session = require('express-session');
@@ -92,7 +93,7 @@ app.post('/login', (req, res) =>{
 app.get('/logout', (req, res) =>{
     req.session.destroy(()=>{
         req.logout();
-        res.sendFile(path.join(__dirname + '/../static/index.html'));
+        res.redirect('/');
     })
 })
 
