@@ -9,8 +9,7 @@ const { info } = require('console');
 var session = require('express-session');
 app.use(bodyParser.json());              // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-var cookieParser = require('cookie-parser');
-app.use(cookieParser('secret'));
+app.use(session({secret:"yftfrdutdfuygihiuytfyds232345566", resave:false, saveUninitialized: true}))
 app.use(session({ email: '', loggedin: false}));
 
 //make sure you have postgres database set up with this information:
