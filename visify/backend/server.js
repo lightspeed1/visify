@@ -4,6 +4,7 @@ const pg = require('pg-promise')();
 const app = express();
 const port = 3000;
 const path = require('path');
+const bcrypt = require("bcrypt");
 
 var bodyParser = require('body-parser');
 const { info } = require('console');
@@ -41,6 +42,8 @@ app.post('/sign_up', (req, res) => {
         .then(function(rows){
             maxId = (rows[0].max) + 1;
             var rQ = req.body;
+            const salt = await bcrypt.hash(rQ.password, 10); //using the bycrypt function to encrypt the password, the 10 means how many times the salt will run through
+            await db('users').insert({email: email, salt: hash});
             var addUserQuery = "INSERT INTO users VALUES ('" + (maxId) + "', '" + rQ.firstName + " " + rQ.lastName + "','" + rQ.email + "','" + rQ.password + "');"
             db.any(addUserQuery)
                 .then(function(rows){
@@ -73,9 +76,11 @@ app.post('/login', (req, res) =>{
             db.any(`SELECT * FROM users WHERE email = '${email}' AND password = '${password}'`)
                 .then(function(rows)
                 {
+                const validPass = await bcrypt.compare(req.body.password, user.hash);
                     console.log(rows);
-                    if(rows.length == 1)
+                    if(rows.length == 1 || validPass)
                     {
+                        res.status(200).json('Valid Email and Password!');
                         req.session.loggedin = true;
                         req.session.email = email;
                         // Redirect to home page
@@ -83,6 +88,7 @@ app.post('/login', (req, res) =>{
                     }
                     else
                     {
+                        res.status(400).json('Wrong password!');
                         res.send("<a href = \"/login\">Account with email and password requested not found</a>");
                     }
                 })
