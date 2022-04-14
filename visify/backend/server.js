@@ -6,10 +6,11 @@ const port = 3000;
 const path = require('path');
 var bodyParser = require('body-parser');
 const { info } = require('console');
-
+var session = require('express-session');
 app.use(bodyParser.json());              // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-app.use(express.session({secret:"yftfrdutdfuygihiuytfyds232345566", resave:false, saveUninitialized: true}))
+app.use(session({secret:"yftfrdutdfuygihiuytfyds232345566", resave:false, saveUninitialized: true}))
+app.use(session({ email: '', loggedin: false}));
 
 //make sure you have postgres database set up with this information:
 const dbConfig = {
@@ -55,44 +56,37 @@ app.post('/sign_up', (req, res) => {
 });
 
 app.post('/login', (req, res) =>{
-    var email = req.body.email;
-    var password = req.body.password;
-    //var getUserInfo = 'select id from users where id = \'' + email + '\' \'' + password + '\';';
+    if(req.session.loggedin == true)
+    {
+        res.send("<a href = \"/\">Already logged in</a>");
+        res.end();
+    }
+    else
+    {
+        var email = req.body.email;
+        var password = req.body.password;
+        //var getUserInfo = 'select id from users where id = \'' + email + '\' \'' + password + '\';';
 
-	// Ensure the input fields exists and are not empty
-    db.task('get-everything', task =>{
-        return task.batch([
-            task.any(email),
-            task.any(password)
-        ])
-
-    })
-    .then(info => {
+        // Ensure the input fields exists and are not empty
         if (email && password) {
-            dbConfig.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], function(err, results, fields) {
-                // If there is an issue with the query, output the error
-                if (err) throw err;
-                // If the account exists
-                if (results.length > 0) {
-                    // Authenticate the user
-                    req.session.loggedin = true;
-                    req.session.email = email;
-                    // Redirect to home page
-                    res.sendFile(path.join(__dirname + '/../static/index.html'));
-                } else {
-                    res.send('Incorrect Email or Password or Both!');
-                }			
-                res.end();
-            });
-        } else {
-            res.send('Please enter Email and Password!');
-            res.end();
+            db.any(`SELECT * FROM users WHERE email = '${email}' AND password = '${password}'`)
+                .then(function(rows)
+                {
+                    console.log(rows);
+                    if(rows.length == 1)
+                    {
+                        req.session.loggedin = true;
+                        req.session.email = email;
+                        // Redirect to home page
+                        res.redirect('/');
+                    }
+                    else
+                    {
+                        res.send("<a href = \"/login\">Account with email and password requested not found</a>");
+                    }
+                })
         }
-    })
-
-    .catch(err =>{
-        console.log('error', err);
-    })
+    }
 });
 
 app.get('/logout', (req, res) =>{
