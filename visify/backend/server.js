@@ -42,9 +42,9 @@ app.post('/sign_up', (req, res) => {
         .then(function(rows){
             maxId = (rows[0].max) + 1;
             var rQ = req.body;
-            const salt = bcrypt.hash(rQ.password, 10); //using the bycrypt function to encrypt the password, the 10 means how many times the salt will run through
-             db('users').insert({email: req.body.email, salt: hash});
-            var addUserQuery = "INSERT INTO users VALUES ('" + (maxId) + "', '" + rQ.firstName + " " + rQ.lastName + "','" + rQ.email + "','" + rQ.password + "');"
+            //using the bycrypt function to encrypt the password, the 1 means how many times the salt will run through
+            var salt = bcrypt.hashSync(rQ.password, 10);
+            var addUserQuery = "INSERT INTO users VALUES ('" + (maxId) + "', '" + rQ.firstName + " " + rQ.lastName + "','" + rQ.email + "','" + String(salt) + "');"
             db.any(addUserQuery)
                 .then(function(rows){
                     console.log(rows);
@@ -69,28 +69,23 @@ app.post('/login', (req, res) =>{
     {
         var email = req.body.email;
         var password = req.body.password;
-        //var getUserInfo = 'select id from users where id = \'' + email + '\' \'' + password + '\';';
-
         // Ensure the input fields exists and are not empty
         if (email && password) {
-            db.any(`SELECT * FROM users WHERE email = '${email}' AND password = '${password}'`)
+            db.any(`SELECT * FROM users WHERE email = '${email}'`)
                 .then(function(rows)
                 {
-                const user =  db('users').first('*').where({email: email});
-                const validPass =  bcrypt.compare(req.body.password, user.hash);
-                    console.log(rows);
-                    if(rows.length == 1 || validPass)
+                const user = rows[0];
+                var result = bcrypt.compareSync(password, user.password);
+                    if(result)
                     {
-                        res.status(200).json('Valid Email and Password!');
                         req.session.loggedin = true;
                         req.session.email = email;
+                        res.status(200).redirect('/');
                         // Redirect to home page
-                        res.redirect('/');
                     }
                     else
                     {
-                        res.status(400).json('Wrong password!');
-                        res.send("<a href = \"/login\">Account with email and password requested not found</a>");
+                        res.status(400).send("<a href = \"/login\">Account with email and password requested not found. Click to go back.</a>");
                     }
                 })
         }
@@ -99,9 +94,19 @@ app.post('/login', (req, res) =>{
 
 app.get('/logout', (req, res) =>{
     req.session.destroy(()=>{
-        req.logout();
+        //req.logout();
+        res.sendFile(path.join(__dirname + '/../static/index.html'));
         res.redirect('/');
     })
+})
+
+app.get('/checklogin', (req,res) =>{
+    //res.json({loggedin: req.session.loggedin});
+    if(req.session.loggedin == undefined)
+    {
+        req.session.loggedin = false;
+    }
+    res.send(JSON.stringify({loggedin: req.session.loggedin, email: req.session.email}));
 })
 
 // start listening
