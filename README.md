@@ -1,5 +1,8 @@
 # csci-3308-spring22-014-04
 
+Visit on heroku:
+https://visify3308.herokuapp.com/
+
 Description of organization:
 All project code is in the visify folder, except for the code for the music visualizer. All static html files are grouped together, along with css and js.
 
