@@ -110,8 +110,8 @@ dist
 node_modules
 package-lock.json
 package.json
-/MILESTONES
-/PROJECT_CODE
+./MILESTONES/**
+./PROJECT_CODE/**
 /team-meating-logs
 /.pnp
 .pnp.js
